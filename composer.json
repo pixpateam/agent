@@ -1,0 +1,40 @@
+{
+    "name": "pixpa/agent",
+    "description": "Desktop/mobile user agent parser with support for Laravel, based on Mobiledetect",
+    "keywords": ["laravel", "useragent", "agent", "user agent", "browser", "platform", "mobile", "desktop"],
+    "license" : "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Pixpa",
+            "homepage": "https://pixpa.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "mobiledetect/mobiledetectlib": "^4.8",
+        "jaybizzle/crawler-detect": "^1.2"
+        
+    },
+    "autoload": {
+        "psr-4": {
+            "Pixpa\\Agent\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "master"
+        },
+        "laravel": {
+            "providers": [
+                "Pixpa\\Agent\\AgentServiceProvider"
+            ],
+            "aliases": {
+                "Agent": "Pixpa\\Agent\\Facades\\Agent"
+            }
+        }
+    },
+    "suggest": {
+        "illuminate/support": "Required for laravel service providers"
+    }
+}
