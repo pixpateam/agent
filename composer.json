@@ -11,12 +11,6 @@
             "homepage": "https://pixpa.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/pixpateam/agent"
-        }
-    ],
     "require": {
         "php": ">=5.6",
         "mobiledetect/mobiledetectlib": "^4.8",
