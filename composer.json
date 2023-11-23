@@ -45,7 +45,8 @@
             }
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "suggest": {
         "illuminate/support": "Required for laravel service providers"
     }
