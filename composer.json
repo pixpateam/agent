@@ -4,6 +4,7 @@
     "keywords": ["laravel", "useragent", "agent", "user agent", "browser", "platform", "mobile", "desktop"],
     "license" : "MIT",
     "type": "library",
+    "homepage": "https://github.com/pixpateam/agent",
     "authors": [
         {
             "name": "Pixpa",
