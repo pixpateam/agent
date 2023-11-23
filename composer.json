@@ -35,7 +35,7 @@
                 "Pixpa\\Agent\\AgentServiceProvider"
             ],
             "aliases": {
-                "Agent": "Pixpa\\Agent\\Facades\\Agent"
+                "Agent": "Pixpa\\Agent\\Agent"
             }
         }
     },
