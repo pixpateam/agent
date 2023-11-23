@@ -107,11 +107,18 @@ class Agent extends MobileDetect
 
     public function getRules(): array
     {
-        if ($this->detectionType === static::DETECTION_TYPE_EXTENDED) {
-            return static::getDetectionRulesExtended();
+        static $rules;
+
+        if (!$rules) {
+            $rules = array_merge(
+                static::$phoneDevices,
+                static::$tabletDevices,
+                static::$operatingSystems,
+                static::$browsers
+            );
         }
 
-        return static::getMobileDetectionRules();
+        return $rules;
     }
 
     /**
@@ -392,12 +399,10 @@ class Agent extends MobileDetect
      */
     public function __call($name, $arguments)
     {
-        // Make sure the name starts with 'is', otherwise
-        if (strpos($name, 'is') !== 0) {
+        // make sure the name starts with 'is', otherwise
+        if (substr($name, 0, 2) !== 'is') {
             throw new BadMethodCallException("No such method exists: $name");
         }
-
-        $this->setDetectionType(self::DETECTION_TYPE_EXTENDED);
 
         $key = substr($name, 2);
 
