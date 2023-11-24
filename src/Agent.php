@@ -210,12 +210,13 @@ class Agent extends MobileDetect
      */
     protected function findDetectionRulesAgainstUA(array $rules, $userAgent = null)
     {
+        $userAgent = (false === empty($userAgent) ? $userAgent : (is_string($this->userAgent) ? $this->userAgent : ''));
         // Loop given rules
         foreach ($rules as $key => $regex) {
             if (empty($regex)) {
                 continue;
             }
-
+            
             // Check match
             if ($this->match($regex, $userAgent)) {
                 return $key ?: reset($this->matchesArray);
@@ -329,9 +330,9 @@ class Agent extends MobileDetect
         return "other";
     }
 
-    public function version($propertyName, $type = self::VERSION_TYPE_STRING): float|bool|string
+    public function version(string $propertyName, string $type = self::VERSION_TYPE_STRING): float|bool|string
     {
-        if (empty($propertyName)) {
+        if (empty($propertyName) || !$this->hasUserAgent()) {
             return false;
         }
 
@@ -344,25 +345,18 @@ class Agent extends MobileDetect
 
         // Check if the property exists in the properties array.
         if (true === isset($properties[$propertyName])) {
-
             // Prepare the pattern to be matched.
             // Make sure we always deal with an array (string is converted).
             $properties[$propertyName] = (array) $properties[$propertyName];
 
             foreach ($properties[$propertyName] as $propertyMatchString) {
-                if (is_array($propertyMatchString)) {
-                    $propertyMatchString = implode("|", $propertyMatchString);
-                }
-
-                $propertyPattern = str_replace('[VER]', self::VER, $propertyMatchString);
+                $propertyPattern = str_replace('[VER]', self::VERSION_REGEX, $propertyMatchString);
 
                 // Identify and extract the version.
                 preg_match(sprintf('#%s#is', $propertyPattern), $this->userAgent, $match);
 
                 if (false === empty($match[1])) {
-                    $version = ($type === self::VERSION_TYPE_FLOAT ? $this->prepareVersionNo($match[1]) : $match[1]);
-
-                    return $version;
+                    return ($type == self::VERSION_TYPE_FLOAT ? $this->prepareVersionNo($match[1]) : $match[1]);
                 }
             }
         }
