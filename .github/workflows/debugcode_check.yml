@@ -1,0 +1,23 @@
+name: Check for "dd" in code
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-dd:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check for "dd" in code
+      run: |
+        if grep -r "dd" .; then
+          echo "Code contains 'dd'. Please remove it before committing."
+          exit 1
+        else
+          echo "Code does not contain 'dd'."
+        fi
