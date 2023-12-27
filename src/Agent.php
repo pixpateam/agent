@@ -117,6 +117,7 @@ class Agent extends MobileDetect
                 static::$browsers
             );
         }
+        dd(12);
 
         return $rules;
     }
