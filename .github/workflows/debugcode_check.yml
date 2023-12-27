@@ -3,7 +3,9 @@ name: Check for "dd" in code
 on:
   push:
     branches:
-      - main
+      - protected
+      - non_protected
+      - 'push-action/**'
 
 jobs:
   check-dd:
