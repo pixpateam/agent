@@ -118,6 +118,8 @@ class Agent extends MobileDetect
             );
         }
         dd(12);
+        dd(12);
+
 
         return $rules;
     }
